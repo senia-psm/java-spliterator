@@ -10,7 +10,7 @@ public class ZipWithIndexDoubleSpliterator extends Spliterators.AbstractSplitera
     private final OfDouble inner;
     private final int currentIndex;
 
-    public ZipWithIndexDoubleSpliterator(long est, int additionalCharacteristics, OfDouble inner) {
+    public ZipWithIndexDoubleSpliterator(OfDouble inner) {
         this(0, inner);
     }
 
