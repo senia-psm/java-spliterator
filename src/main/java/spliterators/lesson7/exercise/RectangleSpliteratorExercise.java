@@ -10,15 +10,15 @@ import java.util.stream.StreamSupport;
 @Fork(1)
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
-@Warmup(iterations = 10, time = 1, timeUnit = TimeUnit.SECONDS)
+@Warmup(iterations = 3, time = 1, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 10, time = 1, timeUnit = TimeUnit.SECONDS)
 @State(Scope.Thread)
 public class RectangleSpliteratorExercise {
 
-    @Param({"100"})
+    @Param({"100", "1000", "10000"})
     public int outerLength;
 
-    @Param({"100"})
+    @Param({"100", "1000", "10000"})
     public int innerLength;
 
     public int[][] array;
