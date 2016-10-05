@@ -27,10 +27,20 @@ public class RectangleSpliterator extends Spliterators.AbstractIntSpliterator {
         this.startInnerInclusive = startInnerInclusive;
     }
 
+    private boolean isSplitterable(){
+        return endOuterExclusive-startInnerInclusive>=2;
+    }
+
     @Override
     public OfInt trySplit() {
-        // TODO
-        throw new UnsupportedOperationException();
+        final int aboutMiddleIndex = startInnerInclusive + (endOuterExclusive-startInnerInclusive)/2;
+
+        RectangleSpliterator rectangleSpliterator = new RectangleSpliterator(array,
+                startOuterInclusive,
+                endOuterExclusive,
+                aboutMiddleIndex);
+                this.startInnerInclusive = aboutMiddleIndex;        //how???? its final
+        return isSplitterable()?rectangleSpliterator:null;
     }
 
     @Override
@@ -38,9 +48,20 @@ public class RectangleSpliterator extends Spliterators.AbstractIntSpliterator {
         return ((long) endOuterExclusive - startOuterInclusive)*innerLength - startInnerInclusive;
     }
 
+    private int currentX;
+    private int currentY;
     @Override
     public boolean tryAdvance(IntConsumer action) {
-        // TODO
-        throw new UnsupportedOperationException();
+        if (currentY>array.length && currentX>array[currentY].length)
+
+        if (startInnerInclusive<endOuterExclusive){
+            action.accept(array[currentY][currentX]);
+            currentX++;
+            if(currentX>=array[currentY].length){
+                currentX=0;
+                currentY++;
+            }
+        }
+        return true;
     }
 }
